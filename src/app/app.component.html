@@ -3,18 +3,46 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+ 
+  
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="Start Date" [formControl]="startDate">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="picker2" placeholder="End Date" [formControl]="endDate">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
+<button  mat-button  (click)="onClick()">Data between given date range</button>
+
+
+<table matSort (matSortChange)="sortData($event)" *ngIf="isShow">
+   
+  <tr>
+    <th mat-sort-header="city">city</th>
+    <th mat-sort-header="start_date">start date</th>
+    <th mat-sort-header="end_date">end date</th>
+    <th mat-sort-header="price">price</th>
+    <th mat-sort-header="status">status</th>
+    <th mat-sort-header="color">color</th>
+  </tr>
+
+  <tr *ngFor= "let data of smsData">
+    <td>{{data.city}} </td>
+    <td>{{data.start_date}} </td>
+    <td>{{data.end_date}} </td>
+    <td>{{data.price}} </td>
+    <td>{{data.status}} </td>
+    <td>{{data.color}} </td>
+     
+  </tr>
+</table>
+<div *ngIf="!isShow">
+  No data available!
+</div>
